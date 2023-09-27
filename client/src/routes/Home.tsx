@@ -1,6 +1,6 @@
 import React from 'react'
 import RestaurantsList from '../components/RestaurantsList'
-import AddRestaurantForm from '../components/AddRestaurantForm'
+import AddRestaurantForm from '../components/AddRestaurant'
 
 function Home() {
   return (

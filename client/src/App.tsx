@@ -6,12 +6,11 @@ import Home from './routes/Home';
 import RestaurantUpdate from './routes/RestaurantUpdate';
 import RestaurantDetail from './routes/RestaurantDetail';
 import { RestaurantContextProvider } from './context/RestaurantContext';
-//import { RestaurantContextProvider } from './context/RestaurantsContext';
 function App() {
 
 
   return(
-      <div className='container'>
+      <div className='p-12'>
         <RestaurantContextProvider>
           <Router>
             <Routes>

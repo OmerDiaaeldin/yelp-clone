@@ -35,25 +35,6 @@ const RestaurantsList = (props: any) => {
           </tr>
           </thead>
         <tbody>
-          {/* {
-            
-          }
-         <tr className='bg-black hover:bg-slate-800'>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Mcdonalds</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>New York</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>$$</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Rating</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Edit</button></td>
-              <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button></td>
-          </tr>
-          <tr className='bg-black hover:bg-slate-800'>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Mcdonalds</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>New York</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>$$</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Rating</td>
-              <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Edit</button></td>
-              <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button></td>
-          </tr> */}
           {restaurants && restaurants.map(restaurant => {
             return(
               <tr className='bg-black hover:bg-slate-800' key={restaurant.id as unknown as string}>
