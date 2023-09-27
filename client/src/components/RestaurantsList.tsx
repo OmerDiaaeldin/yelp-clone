@@ -20,6 +20,17 @@ const RestaurantsList = (props: any) => {
     fetchData();
   }, [])
 
+  const handleDelete = async (restaurantId: any) => {
+    try {
+      await RestaurantFinder.delete(`/${restaurantId}`);
+      setRestaurants(restaurants.filter((restaurant) => {
+        return (restaurant.id !== restaurantId);
+      }))
+    } catch (error) {
+      
+    }
+  }
+
 
 
   return (
@@ -43,7 +54,7 @@ const RestaurantsList = (props: any) => {
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{'$'.repeat(restaurant.price_range)}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Rating</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Edit</button></td>
-                <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button></td>
+                <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(restaurant.id)}>Delete</button></td>
               </tr>
             )
           })}

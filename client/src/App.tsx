@@ -10,7 +10,7 @@ function App() {
 
 
   return(
-      <div className='p-12'>
+      <div className="pb-12 mb-12">
         <RestaurantContextProvider>
           <Router>
             <Routes>

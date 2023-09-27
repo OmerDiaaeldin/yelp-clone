@@ -37,7 +37,6 @@ app.get("/api/v1/restaurants", async (req: Request, res: Response) => {
 app.get("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Response) => {
     
     try {
-        //const restaurant = await db.query(`select * from restaurants where id = $1`, [req.params.restaurant_id])
         const restaurant:{
             id: any,
             name: string,
@@ -97,7 +96,6 @@ app.post("/api/v1/restaurants", async (req: Request, res: Response) => {
 //Update the restaurant data
 app.put("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Response) => {
     try {
-        //const result = await db.query("UPDATE restaurants SET name=$1, location = $2, price_range = $3 WHERE id = $4 returning *", [req.body.name, req.body.location, req.body.price_range, req.params.restaurant_id]);
         const result:{
             id: any,
             name: string,
@@ -130,7 +128,6 @@ app.put("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Response
 //Delete the restaurant data
 app.delete("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Response) => {
     try {
-        //const results = await db.query("DELETE FROM restaurants WHERE id=$1", [req.params.restaurant_id]);
         const result = await prisma.restaurants.delete({
             where: {
                 id: Number(req.params.restaurant_id)
