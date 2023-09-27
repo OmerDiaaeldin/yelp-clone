@@ -1,0 +1,16 @@
+  generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model restaurants {
+  id          BigInt @id @default(autoincrement())
+  name        String @db.VarChar(50)
+  location    String @db.VarChar(50)
+  price_range Int
+}
