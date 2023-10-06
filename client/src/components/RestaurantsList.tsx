@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import RestaurantFinder from '../apis/RestaurantFinder'
 import { RestaurantType } from "../@types/types";
 import { useRestaurantContext } from '../context/RestaurantContext';
@@ -6,6 +7,7 @@ import { useRestaurantContext } from '../context/RestaurantContext';
 const RestaurantsList = (props: any) => {
 
   const {restaurants, setRestaurants} = useRestaurantContext();
+  const history = useNavigate();
 
 
   useEffect(()=> {
@@ -31,6 +33,10 @@ const RestaurantsList = (props: any) => {
     }
   }
 
+  const handleUpdate = (id: any) => {
+    history(`/restaurants/${id}/update`)
+  }
+
 
 
   return (
@@ -53,7 +59,7 @@ const RestaurantsList = (props: any) => {
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{restaurant.location}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{'$'.repeat(restaurant.price_range)}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Rating</td>
-                <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Edit</button></td>
+                <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button onClick={() => {handleUpdate(restaurant.id)}} className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Update</button></td>
                 <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(restaurant.id)}>Delete</button></td>
               </tr>
             )

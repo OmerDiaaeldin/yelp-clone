@@ -15,8 +15,8 @@ function App() {
           <Router>
             <Routes>
               <Route path = "/" Component={Home}/>
-              <Route path = "/:restaurantId/update" Component={RestaurantUpdate}/>
-              <Route path = "/:restaurantId" Component={RestaurantDetail}/>
+              <Route path = "/restaurants/:restaurantId/update" Component={RestaurantUpdate}/>
+              <Route path = "/restaurants/:restaurantId" Component={RestaurantDetail}/>
           </Routes>
           </Router>
         </RestaurantContextProvider>
