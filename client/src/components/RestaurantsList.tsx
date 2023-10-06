@@ -22,7 +22,8 @@ const RestaurantsList = (props: any) => {
     fetchData();
   }, [])
 
-  const handleDelete = async (restaurantId: any) => {
+  const handleDelete = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, restaurantId: any) => {
+    e.stopPropagation();
     try {
       await RestaurantFinder.delete(`/${restaurantId}`);
       setRestaurants(restaurants.filter((restaurant) => {
@@ -33,11 +34,14 @@ const RestaurantsList = (props: any) => {
     }
   }
 
-  const handleUpdate = (id: any) => {
+  const handleUpdate = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>, id: any) => {
+    e.stopPropagation()
     history(`/restaurants/${id}/update`)
   }
 
-
+  const handleRestaurantPage = (id: any) => {
+    history(`/restaurants/${id}`);
+  }
 
   return (
       <table className='table'>
@@ -54,13 +58,13 @@ const RestaurantsList = (props: any) => {
         <tbody>
           {restaurants && restaurants.map(restaurant => {
             return(
-              <tr className='bg-black hover:bg-slate-800' key={restaurant.id as unknown as string}>
+              <tr onClick={() => {handleRestaurantPage(restaurant.id)}} className='bg-black hover:bg-slate-800' key={restaurant.id as unknown as string}>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{restaurant.name}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{restaurant.location}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>{'$'.repeat(restaurant.price_range)}</td>
                 <td className='table-cell text-white w-48 py-4 pl-20 text-sm'>Rating</td>
-                <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button onClick={() => {handleUpdate(restaurant.id)}} className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Update</button></td>
-                <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(restaurant.id)}>Delete</button></td>
+                <td className='table-cell text-white w-48 py-4 pl-20 text-sm'><button onClick={(e) => {handleUpdate(e, restaurant.id)}} className='bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'>Update</button></td>
+                <td className='table-cell text-white w-48 py-4 pl-16 text-sm'><button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={(e) => handleDelete(e, restaurant.id)}>Delete</button></td>
               </tr>
             )
           })}

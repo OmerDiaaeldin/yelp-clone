@@ -1,10 +1,16 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { RestaurantType, RestaurantContextType } from "../@types/types";
-import { Dispatch } from "react";
 
-const RestaurantContext = createContext<RestaurantContextType>({
+export const RestaurantContext = createContext<RestaurantContextType>({
     restaurants: [],
     setRestaurants: () => {},
+    selectedRestaurant: {
+        id: BigInt(1),
+        name: 'placeholder',
+        location: 'placeholder',
+        price_range: 1
+    },
+    setSelectedRestaurant: () => {}
 });
 
 export const useRestaurantContext = () => {
@@ -14,10 +20,18 @@ export const useRestaurantContext = () => {
 export const RestaurantContextProvider = ({children}: {children: ReactNode}) => {
 
     const [restaurants, setRestaurants] = useState<RestaurantType[]>([]);
+    const [selectedRestaurant, setSelectedRestaurant] = useState<any>({
+        id: BigInt(1),
+        name: 'placeholder',
+        location: 'placeholder',
+        price_range: 1
+    });
 
-    const contextValue: RestaurantContextType = {
+    const contextValue: any = {
         restaurants,
-        setRestaurants
+        setRestaurants,
+        selectedRestaurant,
+        setSelectedRestaurant
     }
     return(
         <RestaurantContext.Provider value={contextValue}>

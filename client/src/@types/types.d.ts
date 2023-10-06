@@ -10,5 +10,7 @@ export interface RestaurantType{
 
 export interface RestaurantContextType{
     restaurants: RestaurantType[],
-    setRestaurants: Dispatch;
+    setRestaurants: Dispatch,
+    selectedRestaurant: RestaurantType,
+    setSelectedRestaurant: Dispatch
 }
