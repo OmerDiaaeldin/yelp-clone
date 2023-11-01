@@ -98,11 +98,7 @@ app.get("/api/v1/restaurants/:restaurant_id", function (req, res) { return __awa
                     })];
             case 2:
                 reviews = _a.sent();
-                res.status(200).json({
-                    'status': 'success',
-                    'restaurant': restaurant,
-                    'reviews': reviews
-                });
+                res.send('here');
                 return [3 /*break*/, 4];
             case 3:
                 error_2 = _a.sent();
@@ -230,7 +226,6 @@ app.post("/api/v1/restaurants/:id/AddReview", function (req, res) { return __awa
                     })];
             case 1:
                 response = _a.sent();
-                console.log(response);
                 res.json({
                     'status': "success",
                     'data': {

@@ -22,5 +22,5 @@ model reviews {
   name          String      @db.VarChar(50)
   review        String
   rating        Int
-  restaurants   restaurants @relation(fields: [restaurant_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  restaurants   restaurants @relation(fields: [restaurant_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
