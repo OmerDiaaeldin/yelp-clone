@@ -52,9 +52,17 @@ app.get("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Response
         }else{
             restaurant.id = Number(restaurant.id)
         }
+
+        const reviews = await prisma.reviews.findMany({
+            where:{
+                restaurant_id: BigInt(req.params.restaurant_id),
+            }
+        })
+
         res.status(200).json({
             'status': 'success',
             'restaurant': restaurant,
+            'reviews': reviews
         })
     } catch (error) {
         res.status(400).json({
@@ -144,6 +152,30 @@ app.delete("/api/v1/restaurants/:restaurant_id", async (req: Request, res: Respo
     }
 })
 
+app.post("/api/v1/restaurants/:id/AddReview",async (req:Request, res: Response) => {
+    try {
+        const review = req.body;
+        const response = await prisma.reviews.create({
+            data: {
+                name: review.name,
+                rating: review.rating,
+                review: review.Review,
+                restaurant_id: BigInt(req.params.id)
+            }
+        })
+        res.json({
+            'status': "success",
+            'data': {
+                'review': review
+            }
+        })
+    } catch (error) {
+        res.json({
+            status: 'failure',
+            error: error
+        })
+    }    
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

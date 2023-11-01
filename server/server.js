@@ -73,11 +73,11 @@ app.get("/api/v1/restaurants", function (req, res) { return __awaiter(void 0, vo
 }); });
 //get data of single restaurant
 app.get("/api/v1/restaurants/:restaurant_id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var restaurant, error_2;
+    var restaurant, reviews, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 3, , 4]);
                 return [4 /*yield*/, prisma.restaurants.findUnique({
                         where: {
                             id: BigInt(req.params.restaurant_id),
@@ -91,19 +91,27 @@ app.get("/api/v1/restaurants/:restaurant_id", function (req, res) { return __awa
                 else {
                     restaurant.id = Number(restaurant.id);
                 }
+                return [4 /*yield*/, prisma.reviews.findMany({
+                        where: {
+                            restaurant_id: BigInt(req.params.restaurant_id),
+                        }
+                    })];
+            case 2:
+                reviews = _a.sent();
                 res.status(200).json({
                     'status': 'success',
                     'restaurant': restaurant,
+                    'reviews': reviews
                 });
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 error_2 = _a.sent();
                 res.status(400).json({
                     'status': 'failure',
                     'error': error_2
                 });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
@@ -199,6 +207,42 @@ app.delete("/api/v1/restaurants/:restaurant_id", function (req, res) { return __
                 res.status(400).json({
                     'status': 'failure',
                     'data': error_5
+                });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+app.post("/api/v1/restaurants/:id/AddReview", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var review, response, error_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                review = req.body;
+                return [4 /*yield*/, prisma.reviews.create({
+                        data: {
+                            name: review.name,
+                            rating: review.rating,
+                            review: review.Review,
+                            restaurant_id: BigInt(req.params.id)
+                        }
+                    })];
+            case 1:
+                response = _a.sent();
+                console.log(response);
+                res.json({
+                    'status': "success",
+                    'data': {
+                        'review': review
+                    }
+                });
+                return [3 /*break*/, 3];
+            case 2:
+                error_6 = _a.sent();
+                res.json({
+                    status: 'failure',
+                    error: error_6
                 });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
